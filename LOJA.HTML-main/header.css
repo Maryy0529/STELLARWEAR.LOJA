@@ -1,0 +1,136 @@
+
+
+
+header {
+  width: 100%;
+  padding: 20px 5%;
+  position: relative;
+  background: linear-gradient(90deg, #181341b6, #3c1b4e90);
+  box-sizing: border-box;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: "Rubik Iso", system-ui;
+  font-size: 26px;
+  color: #fff;
+}
+
+#nav_list {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+#nav_list li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+#nav_list li a:hover {
+  color: #a073afae;
+}
+
+#mobile_btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+}
+ 
+
+/* ===== MENU MOBILE ===== */
+#mobile_menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 70%;
+  background-color: #12162cd8;
+  box-shadow: -4px 0 15px rgba(204, 185, 214, 0.669);
+  padding: 50px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+#mobile_menu.active {
+  display: flex;
+  transform: translateX(0);
+}
+
+#mobile_menu ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+#mobile_menu li {
+  margin-bottom: 20px;
+}
+
+#mobile_menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+}
+
+.bnt-default {
+  background: #522062c0;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ajuste para botão carrinho */
+#cart_btn {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* Simplificar media query para mobile menu */
+@media (max-width: 768px) {
+  #nav_list {
+    display: none;
+  }
+
+  #mobile_btn {
+    display: block;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor:pointer
+  }
+  
+  /* opcional: garantir que #mobile_menu se torne visível quando .active */
+  #mobile_menu.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #mobile_nav_list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px;
+  }
+}
+

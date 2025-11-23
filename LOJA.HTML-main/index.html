@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stellar Wear — Galáxia</title>
+  <meta name="description" content="Loja de roupas Stellar Wear — tema estrela e galáxia. Busca, carrinho e visualização de produtos." />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#b78cff;
+      --accent-2:#7be3ff;
+      --dark-1:#0b0720;
+      --card:#120922cc;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: radial-gradient(ellipse at bottom left, rgba(138,43,226,0.08) 0%, transparent 30%),
+                  linear-gradient(135deg,#04021a 0%, #0b0528 40%, #1b0638 100%);
+      color:#fff;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    .stars { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.7;
+      background-image:
+        radial-gradient(#fff 0.6px, transparent 0.7px),
+        radial-gradient(#fff 0.5px, transparent 0.6px);
+      background-size: 300px 300px, 100px 100px;
+      background-position: 10% 20%, 70% 80%;
+      mix-blend-mode:screen;
+      animation: twinkle 8s linear infinite;
+    }
+    @keyframes twinkle{0%{opacity:0.8}50%{opacity:0.55}100%{opacity:0.8}}
+    .container{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;gap:20px;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-ico{width:48px;height:48px;border-radius:50%;background:conic-gradient(from 90deg at 50% 50%, #ffd9ff, #b78cff 30%, #7be3ff 60%, #ffd9ff);display:flex;align-items:center;justify-content:center;color:#070018;font-weight:700;box-shadow:0 6px 22px rgba(127,81,255,0.18), inset 0 -6px 20px rgba(255,255,255,0.06)}
+    .brand h1{font-size:20px;letter-spacing:0.6px}
+    .brand p{font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px}
+    .search-wrap{flex:1;max-width:560px;margin:0 20px;display:flex;align-items:center;gap:10px}
+    .search{flex:1;display:flex;align-items:center;background:var(--glass);padding:10px 12px;border-radius:12px;backdrop-filter: blur(6px)}
+    .search input{flex:1;background:transparent;border:none;color:inherit;font-size:14px;outline:none}
+    .search button{border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 12px;border-radius:10px;color:#070018;font-weight:700;cursor:pointer}
+    .actions{display:flex;align-items:center;gap:12px}
+    .icon-btn{background:var(--glass);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .cart-badge{position:relative}
+    .badge{position:absolute;top:-6px;right:-6px;background:#ffec6b;color:#070018;padding:2px 6px;border-radius:999px;font-size:12px;font-weight:700}
+    nav ul{display:flex;gap:18px;list-style:none}
+    nav a{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:20px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;box-shadow:0 8px 40px rgba(16,8,40,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .hero h2{font-size:34px;margin-bottom:10px}
+    .cta-row{display:flex;gap:12px}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px 18px;border-radius:12px;color:#070018;font-weight:800;cursor:pointer;border:none}
+    .galaxy-visual{height:260px;border-radius:14px;overflow:hidden;position:relative;background: radial-gradient(circle at 10% 10%, rgba(123,227,255,0.08), transparent 12%), radial-gradient(circle at 80% 80%, rgba(183,140,255,0.06), transparent 15%);display:flex;align-items:center;justify-content:center}
+    .galaxy-visual img{max-width:100%;max-height:100%;object-fit:cover;opacity:0.95}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin-top:34px}
+    h3.section{font-size:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 20px rgba(0,0,0,0.5);display:flex;flex-direction:column;gap:10px}
+    .card .img{height:220px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05))}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .card h4{margin:0;font-size:16px}
+    .price{font-weight:800;color:var(--accent-2)}
+    .actions-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .small-btn{padding:8px 10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .like{background:transparent;border:1px solid rgba(255,255,255,0.06);}
+    .buy{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#070018}
+    .cart-panel{position:fixed;right:18px;top:18px;width:360px;max-width:90%;height:calc(100vh - 36px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(8px);border-radius:14px;padding:16px;box-shadow:0 30px 80px rgba(10,6,30,0.6);transform:translateX(420px);transition:transform .32s ease;z-index:100}
+    .cart-panel.open{transform:translateX(0)}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+    .cart-footer{margin-top:12px}
+    .modal{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,2,8,0.6), rgba(2,2,8,0.9));display:flex;align-items:center;justify-content:center;padding:24px;z-index:120;visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal-card{width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));border-radius:14px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.search-wrap{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}}
+    @media (max-width:600px){header{flex-wrap:wrap}.brand p{display:none}.hero{gap:12px}.modal-card{grid-template-columns:1fr}}
+    footer{margin:60px 0 40px;color:rgba(255,255,255,0.6);text-align:center;font-size:14px}
+    /* small visual active for like */
+    .like.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#070018}
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo-ico" aria-hidden>★</div>
+        <div>
+          <h1>Stellar Wear</h1>
+          <p>Moda galáctica • brilha como estrela</p>
+        </div>
+      </div>
+
+      <nav aria-label="menu">
+        <ul>
+          <li><a href="#home" class="nav-link">Início</a></li>
+          <li><a href="#produtos" class="nav-link">Roupas</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <div class="search-wrap">
+        <div class="search" role="search">
+          <input id="searchInput" placeholder="Buscar por nome, tipo ou cor — ex: vestido" aria-label="Buscar" />
+          <button id="btnSearch" type="button">Buscar</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="icon-btn" id="btnWishlist" title="Favoritos">✨</button>
+        <div class="cart-badge">
+          <button class="icon-btn" id="btnCart" aria-haspopup="true" aria-expanded="false">🛒</button>
+          <span class="badge" id="cartCount">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-card">
+          <h2>Vista-se de estrelas</h2>
+          <p>Peças inspiradas na galáxia: cortes modernos, estampas exclusivas e brilho sutil.</p>
+          <div class="cta-row">
+            <button class="cta" id="shopNow">Comprar agora</button>
+            <button class="cta" id="viewAll">Ver todas</button>
+          </div>
+        </div>
+        <div class="galaxy-visual">
+          <img src="imagens/ChatGPT Image 23_11_2025, 20_37_19.png" alt="galaxy" />
+        </div>
+      </section>
+
+      <section id="produtos">
+        <div class="section-title">
+          <h3 class="section">Produtos em destaque</h3>
+          <div>
+            <label style="font-size:13px;margin-right:8px;color:rgba(255,255,255,0.7)">Ordenar</label>
+            <select id="sort" style="padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)">
+              <option value="popular">Mais populares</option>
+              <option value="price_asc">Preço: menor</option>
+              <option value="price_desc">Preço: maior</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section id="sobre" style="margin-top:40px">
+        <h3 class="section">Sobre a Stellar Wear</h3>
+        <p style="max-width:780px;margin:12px auto;color:rgba(255,255,255,0.75)">Stellar Wear: peças que lembram o universo. Demo com busca, carrinho e visualização — tudo funcional.</p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Stellar Wear — criado com carinho ✨
+    </footer>
+  </div>
+
+  <!-- CART PANEL -->
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <h4>Seu carrinho</h4>
+    <div id="cartItems" style="margin-top:8px"></div>
+    <div class="cart-footer">
+      <p style="font-weight:800">Total: <span id="cartTotal">R$ 0,00</span></p>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="small-btn" id="btnCloseCart">Fechar</button>
+        <button class="small-btn buy" id="btnCheckout">Finalizar compra</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="height:420px;border-radius:10px;overflow:hidden;background:#070018">
+          <img id="modalImg" src="" alt="produto" style="width:100%;height:100%;object-fit:cover" />
+        </div>
+        <div style="display:flex;gap:8px">
+          <img class="thumb" src="" alt="thumb1" style="height:64px;width:64px;border-radius:8px;object-fit:cover" />
+          <img class="thumb" src="" alt="thumb2" style="height:64px;width:64px;border-radius:8px;object-fit:cover" />
+          <img class="thumb" src="" alt="thumb3" style="height:64px;width:64px;border-radius:8px;object-fit:cover" />
+        </div>
+      </div>
+      <div>
+        <h3 id="modalTitle">Título do produto</h3>
+        <p id="modalDesc" style="color:rgba(255,255,255,0.8);margin:8px 0">Descrição</p>
+        <p style="font-weight:800;font-size:18px;color:var(--accent-2)" id="modalPrice">R$ 0,00</p>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <select id="modalSize" style="padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)">
+            <option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option>
+          </select>
+          <input id="modalQty" type="number" value="1" min="1" style="width:84px;padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)" />
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <button class="small-btn buy" id="modalAdd">Adicionar ao carrinho</button>
+          <button class="small-btn" id="modalClose">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const PRODUCTS = [
+  {id:1,name:'Vestido preto basico',type:'Vestido',price:89.90,imgs:[
+    'imagens/transferir (10).jpg'
+  ],desc:'Vestido fluido preto com plisados mini.'},
+
+  {id:2,name:'Jaqueta Estelar',type:'Jaqueta',price:219.50,imgs:[
+    'imagens/transferir (18).jpg'
+  ],desc:'Jaqueta com acabamento de veludo.'},
+
+  {id:3,name:'Saia gotica',type:'Saia',price:49.90,imgs:[
+    'imagens/transferir (3).jpg'
+  ],desc:'mini saia assimetrica estilosa.'},
+
+  {id:4,name:'Calça estrela',type:'Calça',price:149.00,imgs:[
+    'imagens/transferir (8).jpg'
+  ],desc:'Calça com corte reto e tecido confortável.'},
+
+  {id:5,name:'cropped Cometa',type:'Top',price:59.90,imgs:[
+    'imagens/Conjunto De Camiseta Casual De Verão Feminina Harajuku Y2K Retro Streetwear Com Estampa De Gola.jpg'
+  ],desc:'Top cropped ideal para looks Y2K.'},
+
+  {id:6,name:'Blusa goth decotada',type:'Blusa',price:99.90,imgs:[
+    'imagens/Top Verdusa Y2k Gothic Goth Halter Mesh Sheer Backless.jpg'
+  ],desc:'Blusa transparente com estrelas.'},
+
+  {id:7,name:'Vestido elegante',type:'Vestido',price:139.90,imgs:[
+    'imagens/transferir (15).jpg'
+  ],desc:'Vestido preto longo com uma fenda na lateral.'},
+
+  {id:8,name:'Blusa gatinho',type:'Blusa',price:89.90,imgs:[
+    'imagens/transferir (5).jpg'
+  ],desc:'Blusa com recortes e estampa de gato.'},
+
+  {id:9,name:'Jaqueta Eclipse',type:'Jaqueta',price:259.00,imgs:[
+    'imagens/transferir (17).jpg'
+  ],desc:'Jaqueta preta com detalhes refletivos.'},
+
+  {id:10,name:'jorts strewwear',type:'Shorts',price:99.90,imgs:[
+    'imagens/DELIRIA (@deliriaisdead) • Instagram photos and videos.jpg'
+  ],desc:'jorts leve com textura brilhante.'},
+
+  {id:11,name:'Saia strewwear',type:'Saia',price:119.90,imgs:[
+    'imagens/⭐️🩶.jpg'
+  ],desc:'Saia mini estilosa com recortes.'},
+
+  {id:12,name:'Calça caveira',type:'Calça',price:169.00,imgs:[
+    'imagens/Y2K JEANS UNISEX.jpg'
+  ],desc:'Calça moderna com recortes geométricos cósmicos.'},
+
+  {id:13,name:'blusa assimetrica de flores.',type:'blusa',price:49.90,imgs:[
+    'imagens/transferir (12).jpg'
+  ],desc:'blusa minimalista com brilho metálico.'},
+
+  {id:14,name:'shorts de oncinha',type:'Shorts',price:49.90,imgs:[
+    'imagens/transferir (6).jpg'
+  ],desc:'Blusa preta com estampas de pequenas constelações.'},
+
+  {id:15,name:'Vestido cinza',type:'Vestido',price:159.90,imgs:[
+    'imagens/transferir (9).jpg'
+  ],desc:'Vestido simples e estiloso.'},
+
+  {id:16,name:'Saia cruz strewwear',type:'Saias',price:69.90,imgs:[
+    'imagens/transferir (2).jpg'
+  ],desc:'Saia confortável com detalhes azulados brilhantes.'},
+
+  {id:17,name:'Calça brihosa',type:'Calça',price:199.00,imgs:[
+    'imagens/SHEIN (1).jpg'
+  ],desc:'Calça com brilhos ornamentais.'},
+
+  {id:18,name:'Saia com pluma',type:'Saia',price:109.90,imgs:[
+    'imagens/Skirt 1_1 (@rlyeh_clth).jpg'
+  ],desc:'Saia jeans curta com plumas e pedras.'},
+
+  {id:19,name:'Blusa demonio',type:'Blusa',price:79.90,imgs:[
+    'imagens/Knitted High Neck Sexy Color Block Punk Style Skull Print Slim Sleeveless Tank Top, School.jpg'
+  ],desc:'Blusa leve com estampa.'},
+
+  {id:20,name:'blusa de coração',type:'Blusa',price:189.90,imgs:[
+    'imagens/transferir (1).jpg'
+  ],desc:'blusa elegante.'}
+];
+
+
+    
+
+    // Estado
+    const state = { products: PRODUCTS.slice(), cart: [] };
+
+    // Helpers
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+    const formatPrice = v => 'R$ ' + v.toFixed(2).replace('.',',');
+
+    // Render grid
+    function renderGrid(list){
+      const grid = $('#grid'); grid.innerHTML='';
+      if(!list.length){
+        grid.innerHTML = '<p style="grid-column:1/-1;color:rgba(255,255,255,0.7)">Nenhum produto encontrado.</p>';
+        return;
+      }
+      list.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `
+          <div class="img"><img src="${p.imgs[0]}" alt="${p.name}"></div>
+          <div style="padding:6px 2px"><h4>${p.name}</h4>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:14px;color:rgba(255,255,255,0.75)">${p.type}</span>
+              <span class="price">${formatPrice(p.price)}</span>
+            </div>
+          </div>
+          <div class="actions-row" style="padding-top:4px">
+            <button class="small-btn like" data-id="${p.id}" title="Curtir">♥</button>
+            <button class="small-btn buy" data-id="${p.id}" data-action="buy">Comprar</button>
+            <button class="small-btn" data-id="${p.id}" data-action="view">Ver</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Inicializar
+    renderGrid(state.products);
+    $('#year').textContent = new Date().getFullYear();
+
+    // Busca
+    $('#btnSearch').addEventListener('click', () => {
+      const q = $('#searchInput').value.trim().toLowerCase();
+      const filtered = PRODUCTS.filter(p => (p.name + ' ' + p.type + ' ' + p.desc).toLowerCase().includes(q));
+      renderGrid(filtered);
+    });
+    $('#searchInput').addEventListener('keydown', e => { if(e.key === 'Enter') $('#btnSearch').click(); });
+
+    // Ordenação
+    $('#sort').addEventListener('change', () => {
+      const val = $('#sort').value;
+      let arr = [...state.products];
+      if(val === 'price_asc') arr.sort((a,b)=>a.price-b.price);
+      if(val === 'price_desc') arr.sort((a,b)=>b.price-a.price);
+      // 'popular' - mantemos ordem default
+      renderGrid(arr);
+    });
+
+    // Delegação para botões dentro dos cards
+    document.getElementById('grid').addEventListener('click', (e) => {
+      const target = e.target;
+      const buy = target.closest('[data-action="buy"]');
+      const view = target.closest('[data-action="view"]');
+      const like = target.closest('.like');
+      if (buy) {
+        const id = Number(buy.dataset.id);
+        addToCart(id, 1);
+      }
+      if (view) {
+        const id = Number(view.dataset.id);
+        openModal(id);
+      }
+      if (like) {
+        like.classList.toggle('active');
+      }
+    });
+
+    // Ctas hero
+    $('#shopNow').addEventListener('click', () => {
+      const top = $('#produtos').offsetTop - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+    $('#viewAll').addEventListener('click', () => { renderGrid(PRODUCTS); $('#searchInput').value = ''; });
+
+    // CART
+    function updateCartUI(){
+      const itemsRoot = $('#cartItems'); itemsRoot.innerHTML = '';
+      let total = 0;
+      state.cart.forEach((it, idx) => {
+        const prod = PRODUCTS.find(p => p.id === it.id);
+        const div = document.createElement('div'); div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${prod.imgs[0]}" alt="${prod.name}" />
+          <div style="flex:1">
+            <strong>${prod.name}</strong>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Qtd: ${it.qty} • ${formatPrice(prod.price)}</div>
+          </div>
+          <div style="text-align:right">
+            <button data-idx="${idx}" class="small-btn remove-btn" title="Remover">❌</button>
+          </div>
+        `;
+        itemsRoot.appendChild(div);
+        total += prod.price * it.qty;
+      });
+      $('#cartTotal').textContent = formatPrice(total);
+      $('#cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
+    }
+
+    function addToCart(id, qty = 1){
+      const found = state.cart.find(i => i.id === id);
+      if(found) found.qty += qty; else state.cart.push({ id, qty });
+      updateCartUI();
+      openCart();
+    }
+
+    $('#btnCart').addEventListener('click', () => toggleCart());
+    $('#btnCloseCart').addEventListener('click', () => closeCart());
+    $('#btnCheckout').addEventListener('click', () => {
+      if(state.cart.length === 0){ alert('Seu carrinho está vazio.'); return; }
+      const total = state.cart.reduce((s,i) => s + PRODUCTS.find(p=>p.id===i.id).price * i.qty, 0);
+      // aqui você pode integrar com pagamento real; nesta demo simulamos
+      alert('Compra simulada!\nTotal: ' + formatPrice(total) + '\nObrigado por comprar na Stellar Wear ✨');
+      state.cart = []; updateCartUI(); closeCart();
+    });
+
+    // remover item do carrinho delegando
+    $('#cartItems').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-idx]');
+      if(!btn) return;
+      const idx = Number(btn.dataset.idx);
+      state.cart.splice(idx, 1);
+      updateCartUI();
+    });
+
+    function openCart(){ $('#cartPanel').classList.add('open'); $('#btnCart').setAttribute('aria-expanded','true'); }
+    function closeCart(){ $('#cartPanel').classList.remove('open'); $('#btnCart').setAttribute('aria-expanded','false'); }
+    function toggleCart(){ $('#cartPanel').classList.toggle('open'); }
+
+    // MODAL (visualização)
+    function openModal(id){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+      $('#modalImg').src = p.imgs[0] || '';
+      const thumbs = $$('.thumb');
+      thumbs.forEach((t,i)=>{ t.src = p.imgs[i] || p.imgs[0]; t.onclick = () => { $('#modalImg').src = t.src; }; });
+      $('#modalTitle').textContent = p.name;
+      $('#modalDesc').textContent = p.desc;
+      $('#modalPrice').textContent = formatPrice(p.price);
+      $('#modalQty').value = 1;
+      $('#modal').classList.add('open'); $('#modal').setAttribute('aria-hidden','false');
+
+      $('#modalAdd').onclick = () => {
+        const qty = Math.max(1, parseInt($('#modalQty').value || 1, 10));
+        addToCart(p.id, qty);
+        closeModal();
+      };
+    }
+
+    function closeModal(){
+      $('#modal').classList.remove('open'); $('#modal').setAttribute('aria-hidden','true');
+    }
+    $('#modalClose').addEventListener('click', closeModal);
+    // fecha clicando no backdrop
+    $('#modal').addEventListener('click', (e) => { if(e.target === e.currentTarget) closeModal(); });
+
+    // Garantir update inicial do carrinho
+    updateCartUI();
+
+    // Pequeno atalho: limpar busca com ESC
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape'){ $('#searchInput').value=''; renderGrid(PRODUCTS); closeModal(); closeCart(); }});
+
+  }); // DOMContentLoaded end
+  </script>
+</body>
+</html>
